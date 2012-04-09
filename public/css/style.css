@@ -1,0 +1,55 @@
+body
+{
+	padding:2em;
+	font-family:sans-serif;
+}
+
+hr
+{
+	margin:1.5em 0;
+}
+
+a, a:visited
+{
+	color:#1E7DBD;
+}
+
+div.post
+{
+	padding:0.5em 0;
+	border-top:1px solid #eee;
+}
+div.header
+{
+	padding:2em 0;
+	text-transform:uppercase;
+}
+
+div.post h1
+{
+	font-size:1.4em;
+	line-height:1em;
+}
+
+div.header h2
+{
+	color:#777;
+}
+
+div.header h1, div.header h2
+{
+	margin:0;
+	line-height:1.4em;
+}
+
+label
+{
+	color:#555;
+	font-weight:bold;
+}
+
+input[type=text], textarea
+{
+	padding:0.5em;
+	border:1px solid #444;
+}

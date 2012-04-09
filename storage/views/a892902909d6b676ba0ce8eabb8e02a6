@@ -1,0 +1,23 @@
+
+<?php \Laravel\Section::start('content'); ?>
+	<?php echo  Form::open('login') ; ?>
+
+		<!-- check for login errors flash var -->
+		<?php if (Session::has('login_errors')): ?>
+			<span class="error">Username or password incorrect.</span>
+		<?php endif; ?>
+
+		<!-- username field -->
+		<p><?php echo  Form::label('username', 'Username') ; ?></p>
+		<p><?php echo  Form::text('username') ; ?></p>
+
+		<!-- password field -->
+		<p><?php echo  Form::label('password', 'Password') ; ?></p>
+		<p><?php echo  Form::text('password') ; ?></p>
+
+		<!-- submit button -->
+		<p><?php echo  Form::submit('Login') ; ?></p>
+
+	<?php echo  Form::close() ; ?>
+<?php \Laravel\Section::stop(); ?>
+<?php echo view('templates.main')->with(get_defined_vars())->render(); ?>

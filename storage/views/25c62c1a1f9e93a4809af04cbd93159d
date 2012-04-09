@@ -1,0 +1,24 @@
+<!DOCTYPE HTML>
+<html lang="en-GB">
+<head>
+	<meta charset="UTF-8">
+	<title><?php echo \Laravel\Section::yield('title'); ?></title>
+	<?php echo  HTML::style('css/style.css') ; ?>
+</head>
+<body>
+	<div class="header">
+		<?php if ( Auth::guest() ): ?>
+			<?php echo  HTML::link('admin', 'Login') ; ?>
+		<?php else: ?>
+			<?php echo  HTML::link('logout', 'Logout') ; ?>
+		<?php endif; ?>
+		<hr />
+		<h1>Wordpush</h1>
+		<h2>Code is Limmericks</h2>
+	</div>
+
+	<div class="content">
+		<?php echo \Laravel\Section::yield('content'); ?>
+	</div>
+</body>
+</html>

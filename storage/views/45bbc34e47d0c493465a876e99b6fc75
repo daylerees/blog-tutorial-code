@@ -1,0 +1,10 @@
+
+<?php \Laravel\Section::start('content'); ?>
+	<div class="post">
+		<h1><?php echo  $post->title ; ?></h1>
+		<p><?php echo  $post->body ; ?></p>
+		<p><?php echo  HTML::link('/', '&larr; Back to index.') ; ?></p>
+	</div>
+<?php \Laravel\Section::stop(); ?>
+
+<?php echo view('templates.main')->with(get_defined_vars())->render(); ?>

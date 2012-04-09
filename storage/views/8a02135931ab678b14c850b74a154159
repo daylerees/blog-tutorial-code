@@ -1,0 +1,11 @@
+
+<?php \Laravel\Section::start('content'); ?>
+	<?php foreach ($posts as $post): ?>
+		<div class="post">
+			<h1><?php echo  HTML::link('view/'.$post->id, $post->title) ; ?></h1>
+			<p><?php echo  substr($post->body,0, 120).' [..]' ; ?></p>
+			<p><?php echo  HTML::link('view/'.$post->id, 'Read more &rarr;') ; ?></p>
+		</div>
+	<?php endforeach; ?>
+<?php \Laravel\Section::stop(); ?>
+<?php echo view('templates.main')->with(get_defined_vars())->render(); ?>

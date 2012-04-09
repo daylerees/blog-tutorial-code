@@ -1,0 +1,23 @@
+
+<?php \Laravel\Section::start('content'); ?>
+	<?php echo  Form::open('admin') ; ?>
+
+		<!-- author -->
+		<?php echo  Form::hidden('author_id', $user->id) ; ?>
+
+		<!-- title field -->
+		<p><?php echo  Form::label('title', 'Title') ; ?></p>
+		<?php echo  $errors->first('title', '<p class="error">:message</p>') ; ?>
+		<p><?php echo  Form::text('title', Input::old('title')) ; ?></p>
+
+		<!-- body field -->
+		<p><?php echo  Form::label('body', 'Body') ; ?></p>
+		<?php echo  $errors->first('body', '<p class="error">:message</p>') ; ?>
+		<p><?php echo  Form::textarea('body', Input::old('body')) ; ?></p>
+
+		<!-- submit button -->
+		<p><?php echo  Form::submit('Create') ; ?></p>
+
+	<?php echo  Form::close() ; ?>
+<?php \Laravel\Section::stop(); ?>
+<?php echo view('templates.main')->with(get_defined_vars())->render(); ?>
