@@ -1,3 +1,6 @@
+<!-- this is our blade template file
+	other views will use this as a "wrapper" -->
+
 <!DOCTYPE HTML>
 <html lang="en-GB">
 <head>

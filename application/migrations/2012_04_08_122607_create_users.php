@@ -9,6 +9,8 @@ class Create_Users {
 	 */
 	public function up()
 	{
+
+		// create our users table
 		Schema::create('users', function($table) {
 			$table->increments('id');
 			$table->string('username', 128);
@@ -17,6 +19,7 @@ class Create_Users {
 			$table->timestamps();
 		});
 
+		// insert a default user
 		DB::table('users')->insert(array(
 			'username'	=> 'admin',
 			'nickname'	=> 'Admin',
@@ -31,6 +34,7 @@ class Create_Users {
 	 */
 	public function down()
 	{
+		// drop the users table
 		Schema::drop('users');
 	}
 

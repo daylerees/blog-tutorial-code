@@ -9,6 +9,7 @@ class Create_Posts {
 	 */
 	public function up()
 	{
+		// create our posts table
 		Schema::create('posts', function($table) {
 			$table->increments('id');
 			$table->string('title', 128);
@@ -25,6 +26,7 @@ class Create_Posts {
 	 */
 	public function down()
 	{
+		// drop our posts table
 		Schema::drop('posts');
 	}
 

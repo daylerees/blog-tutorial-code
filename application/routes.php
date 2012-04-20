@@ -1,59 +1,69 @@
 <?php
 
+
 /*
 |--------------------------------------------------------------------------
-| Application Routes
+| VIEW ALL POSTS PAGE
 |--------------------------------------------------------------------------
-|
-| Simply tell Laravel the HTTP verbs and URIs it should respond to. It is a
-| breeze to setup your applications using Laravel's RESTful routing, and it
-| is perfectly suited for building both large applications and simple APIs.
-| Enjoy the fresh air and simplicity of the framework.
-|
-| Let's respond to a simple GET request to http://example.com/hello:
-|
-|		Route::get('hello', function()
-|		{
-|			return 'Hello World!';
-|		});
-|
-| You can even respond to more than one URI:
-|
-|		Route::post('hello, world', function()
-|		{
-|			return 'Hello World!';
-|		});
-|
-| It's easy to allow URI wildcards using (:num) or (:any):
-|
-|		Route::put('hello/(:any)', function($name)
-|		{
-|			return "Welcome, $name.";
-|		});
-|
 */
 
 Route::get('/', function() {
+
 	// lets get our posts and eager load the
 	// author
 	$posts = Post::with('author')->all();
 
+	// show the home view, and include our
+	// posts too
 	return View::make('pages.home')
 		->with('posts', $posts);
+
 });
+
+/*
+|--------------------------------------------------------------------------
+| VIEW A SINGLE POST PAGE
+|--------------------------------------------------------------------------
+*/
 
 Route::get('view/(:num)', function($post) {
+
+	// get our post, identified by the route
+	// parameter
 	$post = Post::find($post);
+
+	// show the full view, and pass the post
+	// we just aquired
 	return View::make('pages.full')
 		->with('post', $post);
+
 });
 
+/*
+|--------------------------------------------------------------------------
+| SHOW THE CREATE POST FORM
+|--------------------------------------------------------------------------
+*/
+
 Route::get('admin', array('before' => 'auth', 'do' => function() {
+
+	// get the current user
 	$user = Auth::user();
+
+	// show the create post form, and send
+	// the current user to identify the post author
 	return View::make('pages.new')->with('user', $user);
+
 }));
 
+/*
+|--------------------------------------------------------------------------
+| HANDLE THE CREATE POST FORM
+|--------------------------------------------------------------------------
+*/
+
 Route::post('admin', array('before' => 'auth', 'do' => function() {
+
 	// let's get the new post from the POST data
 	// this is much safer than using mass assignment
 	$new_post = array(
@@ -89,30 +99,70 @@ Route::post('admin', array('before' => 'auth', 'do' => function() {
 
 	// redirect to viewing our new post
 	return Redirect::to('view/'.$post->id);
+
 }));
 
+/*
+|--------------------------------------------------------------------------
+| SHOW THE LOGIN FORM
+|--------------------------------------------------------------------------
+*/
+
 Route::get('login', function() {
+
+	// display the view with the login form
 	return View::make('pages.login');
+
 });
 
+/*
+|--------------------------------------------------------------------------
+| HANDLE THE THE LOGIN FORM
+|--------------------------------------------------------------------------
+*/
+
 Route::post('login', function() {
+
+	// get the username and password from the POST
+	// data using the Input class
 	$username = Input::get('username');
 	$password = Input::get('password');
 
+	// call Auth::attempt() on the username and password
+	// to try to login, the session will be created
+	// automatically on success
 	if ( Auth::attempt($username, $password) )
 	{
+		// it worked, redirect to the admin route
 		return Redirect::to('admin');
 	}
 	else
 	{
+		// login failed, show the form again and
+		// use the login_errors data to show that
+		// an error occured
 		return Redirect::to('login')
 			->with('login_errors', true);
 	}
+
 });
 
+/*
+|--------------------------------------------------------------------------
+| LOGOUT FROM THE SYSTEM
+|--------------------------------------------------------------------------
+*/
+
+
 Route::get('logout', function() {
+
+	// call the logout method to destroy
+	// the login session
 	Auth::logout();
+
+	// redirect back to the home page
 	return Redirect::to('/');
+	
 });
 
 /*
