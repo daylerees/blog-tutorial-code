@@ -1,7 +1,7 @@
 @layout('templates.main')
 
 @section('content')
-	{{ Form::open('admin') }}
+	{{ Form::open('posts/new') }}
 
 		<!-- author -->
 		{{ Form::hidden('author_id', $user->id) }}
