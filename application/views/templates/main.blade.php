@@ -11,7 +11,7 @@
 <body>
 	<div class="header">
 		@if ( Auth::guest() )
-			{{ HTML::link('admin', 'Login') }}
+			{{ HTML::link('login', 'Login') }}
 		@else
 			{{ HTML::link('logout', 'Logout') }}
 		@endif
